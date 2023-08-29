@@ -1,0 +1,87 @@
+
+import "dart:io";
+
+
+void main(List<String> args) {
+  print("main function star");
+
+  var future = getNetworkData();
+  future.then((value){
+     print('value:$value');
+  }).catchError((error){
+     print(error);
+  });
+
+  print('future:$future');
+  print("main function end");
+
+
+  //printOrderMessage();
+
+}
+
+Future<String> getNetworkData() async {
+  var result = await Future.delayed(Duration(seconds: 3), (){
+    return "network data";
+  });
+    return  "请求到的数据：" + result;
+
+}
+
+
+
+// Future<String> getNetworkData() {
+//   return Future<String>((){
+//       sleep(Duration(seconds: 3));
+//       //return "network data";
+//       throw Exception("网络请求出现错误");
+//   });
+// }
+
+// class Anchor {
+//   String nickname;
+//   String roomName;
+//   String imageUrl;
+
+//   Anchor({
+//       this.nickname,
+//       this.roomName,
+//       this.imageUrl
+//   });
+
+// Anchor.withMap(Map<String, dynamic> parsedMap) {
+//   this.nickname = parsedMap['nickname'];
+//   this.roomName = parsedMap['roomName'];
+//   this.imageUrl = parsedMap['roomSrc'];
+// }
+
+// }
+
+
+// Future<List<Anchor>> getAnchors() async {
+//   String jsonString = await rootBundle.loadString('assets/yz.json');
+
+//   final jsonResult = jsonn.decode(jsonString);
+
+//   List<Anchor> anchors = List();
+//   for (Map<String, dynamic> in jsonResult) {
+//       anchors.add(Anchor.withMap(map));
+//   }
+//   return annchors;
+// }
+
+
+
+Future<void> printOrderMessage() async {
+  print('Awaiting user order...');
+  var order = await fetchUserOrder();
+  print('you order is: $order');
+   print('ending user order...');
+}
+
+Future<String> fetchUserOrder() {
+  print('sssss');
+  return Future.delayed(const Duration(seconds: 2), (){
+      return 'Large latte';
+  });
+}
